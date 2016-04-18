@@ -199,6 +199,9 @@ class TestController extends Controller
  
 Changelog
 ------------
+##### Release 1.0.8 - Changelog
+- Added `getHeaders()` method to retrieve response headers
+
 ##### Release 1.0.7 - Changelog
 - Fixed `getInfo([, int $opt = 0 ])` exception were cURL wasn't initialized before calling `getInfo($opt)`.
 
