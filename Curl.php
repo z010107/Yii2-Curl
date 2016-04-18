@@ -4,8 +4,9 @@
  * With RESTful support.
  *
  * @category  Web-yii2
- * @package   yii2-curl
+ * @package   yii2-curl-ext
  * @author    Nils Gajsek <info@linslin.org>
+ * @author    Andrey Krasilnikov <z010107@gmail.com>
  * @copyright 2013-2015 Nils Gajsek<info@linslin.org>
  * @license   http://opensource.org/licenses/MIT MIT Public
  * @version   1.0.7
@@ -277,7 +278,14 @@ class Curl
      */
     public function getHeaders()
     {
-        return $this->headers;
+        $headers = array();
+        foreach(explode("\n", $this->headers) as $l) {
+            $arr = explode(": ", $l);
+            if (count($arr) == 2) {
+                $headers[$arr[0]] = $arr[1];
+            }
+        }
+        return $headers;
     }
 
     /**
@@ -295,6 +303,7 @@ class Curl
     {
         //set request type and writer function
         $this->setOption(CURLOPT_CUSTOMREQUEST, strtoupper($method));
+        $this->setOption(CURLOPT_HEADER, 1);
 
         //check if method is head and set no body
         if ($method === 'HEAD') {
@@ -330,10 +339,10 @@ class Curl
 
         //retrieve response code
         $this->responseCode = curl_getinfo($this->_curl, CURLINFO_HTTP_CODE);
-        $this->response = $body;
 
         $header_size = curl_getinfo($this->_curl, CURLINFO_HEADER_SIZE);
-        $this->headers =  substr($this->response, 0, $header_size);
+        $this->headers =  substr($body, 0, $header_size);
+        $this->response = substr($body, $header_size);
 
         //end yii debug profile
         Yii::endProfile($method.' '.$url .'#'.md5(serialize($this->getOption(CURLOPT_POSTFIELDS))), __METHOD__);

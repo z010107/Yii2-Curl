@@ -199,6 +199,9 @@ class TestController extends Controller
  
 Changelog
 ------------
+##### Release 1.1.0 - Changelog
+- Fixed `getHeaders()` pretty return array
+
 ##### Release 1.0.8 - Changelog
 - Added `getHeaders()` method to retrieve response headers
 
