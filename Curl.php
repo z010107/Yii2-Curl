@@ -36,6 +36,12 @@ class Curl
     public $response = null;
 
     /**
+     * @var string
+     * Holds response headers data right after sending a request.
+     */
+    public $headers = null;
+
+    /**
      * @var integer HTTP-Status Code
      * This value will hold HTTP-Status Code. False if request was not successful.
      */
@@ -264,6 +270,15 @@ class Curl
         }
     }
 
+    /**
+     * Get response headers
+     *
+     * @return mixed
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
 
     /**
      * Performs HTTP request
@@ -316,6 +331,9 @@ class Curl
         //retrieve response code
         $this->responseCode = curl_getinfo($this->_curl, CURLINFO_HTTP_CODE);
         $this->response = $body;
+
+        $header_size = curl_getinfo($this->_curl, CURLINFO_HEADER_SIZE);
+        $this->headers =  substr($this->response, 0, $header_size);
 
         //end yii debug profile
         Yii::endProfile($method.' '.$url .'#'.md5(serialize($this->getOption(CURLOPT_POSTFIELDS))), __METHOD__);
