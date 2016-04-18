@@ -1,4 +1,4 @@
-yii2-curl extension
+yii2-curl-ext extension
 ===================
 Cool working curl extension for Yii2, including RESTful support:
 
@@ -21,7 +21,7 @@ Installation
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
 ```bash
-php composer.phar require --prefer-dist linslin/yii2-curl "*"
+php composer.phar require --prefer-dist z010107/yii2-curl-ext "*"
 ```
 
 
@@ -38,6 +38,7 @@ Once the extension is installed, simply use it in your code. The following examp
  * @category  Web-yii2-example
  * @package   yii2-curl-example
  * @author    Nils Gajsek <info@linslin.org>
+ * @author    Krasilnikov Andrey <z010107@gmail.com>
  * @copyright 2013-2015 Nils Gajsek<info@linslin.org>
  * @license   http://opensource.org/licenses/MIT MIT Public
  * @version   1.0.7
@@ -76,6 +77,10 @@ class TestController extends Controller
 
         //get http://example.com/
         $response = $curl->get('http://example.com/');
+
+        //get http://example.com/ and get response headers
+        $response = $curl->get('http://example.com/');
+        $headers = $curl->getHeaders();
     }
 
 
@@ -126,6 +131,9 @@ class TestController extends Controller
                 )
             ))
             ->post('http://example.com/');
+
+
+
     }
 
 

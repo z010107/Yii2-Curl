@@ -1,5 +1,5 @@
 {
-    "name": "linslin/yii2-curl",
+    "name": "z010107/yii2-curl-ext",
     "description": "Easy and nice cURL extension with RESTful support for Yii2",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"," curl", "RESTful"],
@@ -8,6 +8,10 @@
         {
             "name": "Nils Gajsek",
             "email": "info@linslin.org"
+        },
+        {
+            "name": "Andrey Krasilnikov",
+            "email": "z010107@gmail.com"
         }
     ],
     "require": {
